@@ -10,7 +10,7 @@ pipeline {
     agent {
         label 'devops'
     }
-    
+
     tools {
         terraform 'Terraform'
     }
@@ -51,6 +51,11 @@ pipeline {
         stage('Apply') {
             steps {
                 sh "terraform apply -input=false tfplan"
+            }
+        }
+        stage('Destroy') {
+            steps {
+                sh "terraform destroy -auto-approve"
             }
         }
     }
